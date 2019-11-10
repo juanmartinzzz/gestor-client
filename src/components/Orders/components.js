@@ -16,27 +16,27 @@ const colours = [
   "#d255ec",
   "#03288d",
   "#7d6407",
-  "#dac826",
+  "#dac826"
 ];
 
 export const getColour = phone => {
-  const sum = phone.split('').reduce((sum, character) => (
-    sum + parseInt(character)
-  ), 0);
-  const randomIndex = sum%colours.length;
-  
+  const sum = phone
+    .split("")
+    .reduce((sum, character) => sum + parseInt(character), 0);
+  const randomIndex = sum % colours.length;
+
   return colours[randomIndex];
-}
+};
 
 export const OrderCard = styled(Card)`
-margin: 24px 0;
+  margin: 24px 0;
 `;
 
 export const UserAvatar = styled(Avatar)`
-&& {
-  color: rgb(255,255,255);
-  background-color: ${props => getColour(props.phone)};
-}
+  && {
+    color: rgb(255, 255, 255);
+    background-color: ${props => getColour(props.phone)};
+  }
 `;
 
 export const Header = styled(CardHeader)`

@@ -28,6 +28,6 @@ const LayoutPage = ({ loading }) => {
       </SwipeableViews>
     </CssBaseline>
   );
-}
+};
 
 export default LayoutPage;

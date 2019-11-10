@@ -7,14 +7,11 @@ const OrdersContainer = ({ firebase }) => {
 
   // onMount
   React.useEffect(() => {
-    const unsubscribeToListener = firebase.onCollection(
-      "orders",
-      {
-        limit: 1,
-        orderBy: ["created-desc"],
-        onSnapshot: orders => setOrders(orders),
-      },
-    );
+    const unsubscribeToListener = firebase.onCollection("orders", {
+      limit: 1,
+      orderBy: ["created-desc"],
+      onSnapshot: orders => setOrders(orders)
+    });
 
     return () => unsubscribeToListener();
   }, []);
@@ -25,17 +22,12 @@ const OrdersContainer = ({ firebase }) => {
       doc: order.id,
       data: {
         ...order,
-        status,
+        status
       }
-    })
+    });
   }
 
-  return (
-    <Orders
-      orders={orders}
-      setOrderStatus={setOrderStatus}
-    />
-  )
+  return <Orders orders={orders} setOrderStatus={setOrderStatus} />;
 };
 
 export default withFirebase(OrdersContainer);

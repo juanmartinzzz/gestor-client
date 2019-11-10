@@ -9,11 +9,7 @@ const LayoutContainer = ({ cart }) => {
     // setLoading(false);
   }, []);
 
-  return (
-    <LayoutPage
-      loading={loading}
-    />
-  );
+  return <LayoutPage loading={loading} />;
 };
 
 export default LayoutContainer;

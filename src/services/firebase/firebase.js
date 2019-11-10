@@ -9,13 +9,13 @@ const getDocWithId = queryDocumentSnapshot => {
 
   return {
     id: queryDocumentSnapshot.id,
-    ...queryDocumentSnapshot.data(),
+    ...queryDocumentSnapshot.data()
   };
 };
 
 const getDocsWithId = collection => {
   return collection.docs.map(doc => getDocWithId(doc));
-}
+};
 
 class Firebase {
   constructor() {
@@ -24,8 +24,15 @@ class Firebase {
   }
 
   // Listen for changes on a whole collection
-  onCollection = (path, { orderBy, limit, onSnapshot, onError, onCompletion }) => {
-    return this.prepareQuery(path, {orderBy, limit}).onSnapshot(collection => onSnapshot(getDocsWithId(collection)), this.logError, onCompletion);
+  onCollection = (
+    path,
+    { orderBy, limit, onSnapshot, onError, onCompletion }
+  ) => {
+    return this.prepareQuery(path, { orderBy, limit }).onSnapshot(
+      collection => onSnapshot(getDocsWithId(collection)),
+      this.logError,
+      onCompletion
+    );
   };
 
   // Listen for changes on a particular document
@@ -36,21 +43,21 @@ class Firebase {
       .onSnapshot(
         doc => onSnapshot(getDocWithId(doc)),
         this.logError,
-        onCompletion,
+        onCompletion
       );
   };
 
-  prepareQuery = (path, {orderBy, limit}) => {
+  prepareQuery = (path, { orderBy, limit }) => {
     let reference = this.db.collection(path).limit(limit || 10);
 
-    if(orderBy) {
+    if (orderBy) {
       // TODO order by several properties
       const [property, direction] = orderBy[0].split("-");
       reference = reference.orderBy(property, direction);
     }
 
     return reference;
-  }
+  };
 
   set = async ({ path, doc, data, replace }) =>
     this.db
@@ -59,14 +66,14 @@ class Firebase {
       .set(this.getDataWithDefaultFields(data), { merge: !replace });
 
   get = async (path, { include, orderBy, limit }) => {
-    const reference = this.prepareQuery(path, {orderBy, limit});
+    const reference = this.prepareQuery(path, { orderBy, limit });
     const querySnapshot = await reference.get();
 
     const entities = await Promise.all(
       querySnapshot.docs.map(async doc => ({
         ...getDocWithId(doc),
-        ...(await this.getSubcollections(doc, include || [])),
-      })),
+        ...(await this.getSubcollections(doc, include || []))
+      }))
     );
 
     return entities;
@@ -82,11 +89,11 @@ class Firebase {
           const [detailLevel, entity] = detailLevelEntityPair.split("-");
           const entities = await this.get(
             `${queryDocumentSnapshot.ref.path}/${entity}`,
-            include,
+            include
           );
 
           subcollections[entity] = entities;
-        }),
+        })
       );
     }
 
@@ -96,7 +103,7 @@ class Firebase {
   getDataWithDefaultFields = data => ({
     ...data,
     created: data.created ? data.created : app.firestore.Timestamp.now(),
-    modified: app.firestore.Timestamp.now(),
+    modified: app.firestore.Timestamp.now()
   });
 
   logError = (response, body) => {
