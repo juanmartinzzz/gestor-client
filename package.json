@@ -1,0 +1,41 @@
+{
+  "name": "gestor-client",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.4.0",
+    "@material-ui/icons": "^4.2.1",
+    "firebase": "^7.0.0",
+    "query-string": "^6.8.3",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1",
+    "react-swipeable-views": "^0.13.3",
+    "styled-components": "^4.3.2"
+  },
+  "devDependencies": {
+    "compress-images": "^1.5.8"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "npm run compress-images; react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "compress-images": "rm -r /tmp/img.backup; mv public/img /tmp/img.backup; node src/services/compressImages.js"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
