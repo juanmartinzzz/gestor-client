@@ -24,7 +24,7 @@ const LayoutPage = ({ loading }) => {
 
       <SwipeableViews axis="x" index={value} onChangeIndex={handleChangeIndex}>
         <OrdersContainer />
-        <div>B</div>
+        <div>"La paciencia es una virtud"</div>
       </SwipeableViews>
     </CssBaseline>
   );

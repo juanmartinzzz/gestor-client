@@ -1,8 +1,8 @@
 import React from "react";
 
 export const date = date => {
-  const hours = date.getHours();
-  const minutes = date.getMinutes();
+  const hours = date.getHours().toString().padStart(2, '0');
+  const minutes = date.getMinutes().toString().padStart(2, '0');
   const dateString = date.toDateString();
 
   return `${dateString} a las ${hours}:${minutes}`;

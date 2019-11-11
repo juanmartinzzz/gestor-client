@@ -12,7 +12,6 @@ const Orders = ({ orders, setOrderStatus }) => (
   <Container maxWidth="md">
     {orders.map((order, i) => {
       const { status, created, userInfo } = order;
-      console.log("--created", created);
 
       return (
         <OrderCard key={i}>
