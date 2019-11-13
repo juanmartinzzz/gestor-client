@@ -39,6 +39,8 @@ export const UserAvatar = styled(Avatar)`
   }
 `;
 
-export const Header = styled(CardHeader)`
-  border: 2px dotted red;
+export const OrderHeader = styled(CardHeader)`
+  && {
+    padding-bottom: 0px;
+  }
 `;
