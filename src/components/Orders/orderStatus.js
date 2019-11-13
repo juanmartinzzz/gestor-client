@@ -6,35 +6,35 @@ export const ORDER_STATUS_ARRIVED = "arrived";
 export const ORDER_STATUS_REJECTED = "rejected";
 export const ORDER_STATUS_FAILED = "failed";
 
-let i=0;
+let i = 0;
 
 export const orderStatusMap = {
   [ORDER_STATUS_REJECTED]: {
     value: i++,
-    label: "Rechazado"
+    label: "Rechazado",
   },
   [ORDER_STATUS_FAILED]: {
     value: i++,
-    label: "Fallido"
+    label: "Fallido",
   },
   [ORDER_STATUS_REQUESTED]: {
     value: i++,
-    label: "Solicitado"
+    label: "Solicitado",
   },
   [ORDER_STATUS_CONFIRMED]: {
     value: i++,
-    label: "Confirmado"
+    label: "Confirmado",
   },
   [ORDER_STATUS_ACCEPTED]: {
     value: i++,
-    label: "Aceptado"
+    label: "Aceptado",
   },
   [ORDER_STATUS_DISPATCHED]: {
     value: i++,
-    label: "Salió"
+    label: "Salió",
   },
   [ORDER_STATUS_ARRIVED]: {
     value: i++,
-    label: "Recibido"
+    label: "Recibido",
   },
 };

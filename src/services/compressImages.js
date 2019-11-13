@@ -19,5 +19,5 @@ compress_images(
     console.log(completed);
     console.log(statistic);
     console.log("-------------");
-  }
+  },
 );

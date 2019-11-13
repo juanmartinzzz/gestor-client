@@ -22,10 +22,7 @@ export const Feedback = ({ rating, comments }) => {
 
       <Typography>
         {[1, 2, 3, 4, 5].map(index => (
-          <RatingStar
-            key={index}
-            full={index <= rating}
-          />
+          <RatingStar key={index} full={index <= rating} />
         ))}
       </Typography>
       <Typography variant="subtitle2">{comments}</Typography>
