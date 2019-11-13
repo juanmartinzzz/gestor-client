@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  orderStatusMap,
-  ORDER_STATUS_ACCEPTED
-} from "../Orders/orderStatus";
+import { orderStatusMap, ORDER_STATUS_ACCEPTED } from "../Orders/orderStatus";
 import { CardActions, Button } from "@material-ui/core";
 import Check from "@material-ui/icons/Check";
 import Motorcycle from "@material-ui/icons/MotorcycleTwoTone";

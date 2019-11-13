@@ -9,13 +9,13 @@ export default createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main: "#212121"
+      main: "#212121",
     },
     secondary: {
-      main: "#f9a825"
-    }
+      main: "#f9a825",
+    },
   },
   typography: {
-    fontFamily: ["Raleway"].join(",")
-  }
+    fontFamily: ["Raleway"].join(","),
+  },
 });

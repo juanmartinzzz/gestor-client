@@ -15,7 +15,7 @@ const Order = ({ order, setOrderStatus }) => {
   return (
     <OrderCard>
       <Header status={status} phone={userInfo.phone} name={userInfo.name} />
-  
+
       <CardContent>
         <Typography variant="subtitle1">
           Status: {orderStatusMap[status].label}
@@ -32,15 +32,13 @@ const Order = ({ order, setOrderStatus }) => {
             </Typography>
             <Typography variant="subtitle2">{userInfo.notes}</Typography>
             <Typography variant="subtitle2">{userInfo.email}</Typography>
-      
+
             <CardDivider />
-            
-            <CartItems 
-              cart={cart}
-            />
-  
+
+            <CartItems cart={cart} />
+
             <CardDivider />
-      
+
             <Typography variant="caption">
               {userInfo.addChopsticks && " · Palillos"}
             </Typography>
@@ -56,16 +54,15 @@ const Order = ({ order, setOrderStatus }) => {
             <Typography variant="caption">
               {userInfo.addSoy && " · Soya"}
             </Typography>
-      
           </Fragment>
         )}
 
         <Feedback rating={order.rating} comments={order.comments} />
       </CardContent>
-  
+
       <Actions order={order} setOrderStatus={setOrderStatus} />
     </OrderCard>
   );
-}
+};
 
 export default Order;

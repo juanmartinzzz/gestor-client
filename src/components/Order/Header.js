@@ -6,7 +6,11 @@ import { ORDER_STATUS_REQUESTED } from "../Orders/orderStatus";
 export const Header = ({ status, name, phone }) => (
   <OrderHeader
     title={name}
-    action={status === ORDER_STATUS_REQUESTED && <CircularProgress color="secondary" />}
+    action={
+      status === ORDER_STATUS_REQUESTED && (
+        <CircularProgress color="secondary" />
+      )
+    }
     avatar={<UserAvatar phone={phone}>{name[0]}</UserAvatar>}
     subheader={
       <Link

@@ -16,7 +16,7 @@ const colours = [
   "#d255ec",
   "#03288d",
   "#7d6407",
-  "#dac826"
+  "#dac826",
 ];
 
 export const getColour = phone => {

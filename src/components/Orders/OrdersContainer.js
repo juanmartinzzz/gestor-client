@@ -9,7 +9,7 @@ const OrdersContainer = ({ firebase }) => {
   React.useEffect(() => {
     const unsubscribeToListener = firebase.onCollection("orders", {
       orderBy: ["created-desc"],
-      onSnapshot: orders => setOrders(orders)
+      onSnapshot: orders => setOrders(orders),
     });
 
     return () => unsubscribeToListener();
@@ -21,8 +21,8 @@ const OrdersContainer = ({ firebase }) => {
       doc: order.id,
       data: {
         ...order,
-        status
-      }
+        status,
+      },
     });
   }
 
