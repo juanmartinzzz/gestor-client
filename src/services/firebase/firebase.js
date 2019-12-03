@@ -28,7 +28,7 @@ class Firebase {
     path,
     { orderBy, limit, onSnapshot, onError, onCompletion },
   ) => {
-    return this.prepareQuery(path, { orderBy, limit }).onSnapshot(
+    return this.prepareQuery({path, orderBy, limit }).onSnapshot(
       collection => onSnapshot(getDocsWithId(collection)),
       this.logError,
       onCompletion,
@@ -47,7 +47,7 @@ class Firebase {
       );
   };
 
-  prepareQuery = (path, { orderBy, limit }) => {
+  prepareQuery = ({ path, orderBy, limit }) => {
     let reference = this.db.collection(path).limit(limit || 10);
 
     if (orderBy) {
@@ -66,7 +66,7 @@ class Firebase {
       .set(this.getDataWithDefaultFields(data), { merge: !replace });
 
   get = async (path, { include, orderBy, limit }) => {
-    const reference = this.prepareQuery(path, { orderBy, limit });
+    const reference = this.prepareQuery({ path, orderBy, limit });
     const querySnapshot = await reference.get();
 
     const entities = await Promise.all(

@@ -1,15 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import LayoutPage from "./LayoutPage";
 
-const LayoutContainer = ({ cart }) => {
-  const [loading, setLoading] = useState(true);
-
-  // onMount
-  React.useEffect(() => {
-    // setLoading(false);
-  }, []);
-
-  return <LayoutPage loading={loading} />;
-};
+const LayoutContainer = () => (<LayoutPage />);
 
 export default LayoutContainer;
