@@ -18,9 +18,14 @@ const CartItem = ({ item }) => {
   );
 };
 
+const SubtotalAndTotal = ({price, discountPercentage}) => (
+  <Typography color="secondary">
+    {discountPercentage ? `Subotal y desc: ${currency(price)} -${discountPercentage}% = ${currency(applyDiscountPercentage(price, discountPercentage))}` : `Subotal: ${currency(price)}`} 
+  </Typography>
+)
+
 const CartItems = ({ cart }) => {
   const price = getTotal(cart);
-  const discountedPrice = applyDiscountPercentage(price, discountPercentage);
 
   return (
     <Fragment>
@@ -28,10 +33,7 @@ const CartItems = ({ cart }) => {
         <CartItem key={i} item={item} />
       ))}
 
-      <Typography>
-        Subotal y desc: {currency(price)} -{discountPercentage}% ={" "}
-        {currency(discountedPrice)}
-      </Typography>
+      <SubtotalAndTotal price={price} discountPercentage={discountPercentage} />
     </Fragment>
   );
 };

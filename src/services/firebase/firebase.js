@@ -1,36 +1,53 @@
 import app from "firebase/app";
 import "firebase/firestore";
+// import "firebase/analytics";
 import { firebaseConfig } from "./config";
+import { logError, getDocWithId, getDocsWithId } from "./utils";
 
-const getDocWithId = queryDocumentSnapshot => {
-  if (!queryDocumentSnapshot.exists) {
-    return;
-  }
-
-  return {
-    id: queryDocumentSnapshot.id,
-    ...queryDocumentSnapshot.data(),
-  };
-};
-
-const getDocsWithId = collection => {
-  return collection.docs.map(doc => getDocWithId(doc));
-};
+const environment = process.env.REACT_APP_ENV;
 
 class Firebase {
   constructor() {
     app.initializeApp(firebaseConfig);
     this.db = app.firestore();
+    // this.analytics = app.analytics();
   }
 
+  // setAnalyticsEvent(name) {
+  //   if (environment) {
+  //     this.analytics.logEvent(`--${environment}-${name}`);
+  //   }
+  // }
+
+  // Get de Firebase date (not User's local date)
+  // getCurrentDate = async () => {
+  //   await this.set({
+  //     path: ".info",
+  //     document: "server",
+  //     data: {
+  //       timestamp: app.firestore.FieldValue.serverTimestamp(),
+  //     },
+  //   });
+  //   const server = await this.getDocument({
+  //     path: ".info",
+  //     document: "server",
+  //   });
+
+  //   return new Date(server.timestamp.seconds * 1000);
+  // };
+
   // Listen for changes on a whole collection
-  onCollection = (
+  onCollection = ({
     path,
-    { orderBy, limit, onSnapshot, onError, onCompletion },
-  ) => {
-    return this.prepareQuery({path, orderBy, limit }).onSnapshot(
+    orderBy,
+    limit,
+    onSnapshot,
+    onError,
+    onCompletion,
+  }) => {
+    return this.prepareListQuery({ path, orderBy, limit }).onSnapshot(
       collection => onSnapshot(getDocsWithId(collection)),
-      this.logError,
+      logError,
       onCompletion,
     );
   };
@@ -40,46 +57,56 @@ class Firebase {
     return this.db
       .collection(path)
       .doc(document)
-      .onSnapshot(
-        doc => onSnapshot(getDocWithId(doc)),
-        this.logError,
-        onCompletion,
-      );
+      .onSnapshot(doc => onSnapshot(getDocWithId(doc)), logError, onCompletion);
   };
 
-  prepareQuery = ({ path, orderBy, limit }) => {
+  prepareListQuery = ({ path, orderBy, limit }) => {
     let reference = this.db.collection(path).limit(limit || 10);
 
     if (orderBy) {
       // TODO order by several properties
       const [property, direction] = orderBy[0].split("-");
       reference = reference.orderBy(property, direction);
+    } else {
+      reference = reference.orderBy("order");
     }
 
     return reference;
   };
 
-  set = async ({ path, doc, data, replace }) =>
+  set = async ({ path, document, data, replace }) =>
     this.db
       .collection(path)
-      .doc(doc)
+      .doc(document)
       .set(this.getDataWithDefaultFields(data), { merge: !replace });
 
-  get = async (path, { include, orderBy, limit }) => {
-    const reference = this.prepareQuery({ path, orderBy, limit });
-    const querySnapshot = await reference.get();
+  getList = async ({ path, include, orderBy, limit }) => {
+    const reference = this.prepareListQuery({ path, orderBy, limit });
+    const listQuerySnapshot = await reference.get();
 
     const entities = await Promise.all(
-      querySnapshot.docs.map(async doc => ({
-        ...getDocWithId(doc),
-        ...(await this.getSubcollections(doc, include || [])),
+      listQuerySnapshot.docs.map(async querySnapshot => ({
+        ...getDocWithId(querySnapshot),
+        ...(await this.getSubcollections({querySnapshot, include, limit})),
       })),
     );
 
     return entities;
   };
 
-  getSubcollections = async (queryDocumentSnapshot, include) => {
+  getDocument = async ({ path, document, include }) => {
+    const querySnapshot = await this.db
+      .collection(path)
+      .doc(document)
+      .get();
+
+    return {
+      ...getDocWithId(querySnapshot),
+      ...(await this.getSubcollections({ querySnapshot, include })),
+    };
+  };
+
+  getSubcollections = async ({querySnapshot, include, limit }) => {
     const subcollections = {};
 
     if (include) {
@@ -87,10 +114,11 @@ class Firebase {
         include.map(async detailLevelEntityPair => {
           // TODO take detailLevel into account
           const [detailLevel, entity] = detailLevelEntityPair.split("-");
-          const entities = await this.get(
-            `${queryDocumentSnapshot.ref.path}/${entity}`,
+          const entities = await this.getList({
+            path: `${querySnapshot.ref.path}/${entity}`,
+            limit,
             include,
-          );
+          });
 
           subcollections[entity] = entities;
         }),
@@ -105,12 +133,6 @@ class Firebase {
     created: data.created ? data.created : app.firestore.Timestamp.now(),
     modified: app.firestore.Timestamp.now(),
   });
-
-  logError = (response, body) => {
-    console.log("--There was an Error on Firebase");
-    console.log("--response", response);
-    console.log("--body", body);
-  };
 }
 
 export default Firebase;

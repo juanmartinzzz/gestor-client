@@ -8,7 +8,8 @@ const OrdersContainer = ({ firebase }) => {
 
   // onMount
   useEffect(() => {
-    const unsubscribeToListener = firebase.onCollection("orders", {
+    const unsubscribeToListener = firebase.onCollection({
+      path: "orders",
       orderBy: ["created-desc"],
       onSnapshot: handleOrdersChange,
     });
