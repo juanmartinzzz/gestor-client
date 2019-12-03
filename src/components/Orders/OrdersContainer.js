@@ -45,7 +45,7 @@ const OrdersContainer = ({ firebase }) => {
   function setOrderStatus(order, status) {
     firebase.set({
       path: "orders",
-      doc: order.id,
+      document: order.id,
       data: {
         ...order,
         status,
