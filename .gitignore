@@ -3,6 +3,10 @@
 # logs
 *log
 
+# Env and helpers
+.env
+env.*
+
 # firebase
 .firebase
 

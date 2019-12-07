@@ -24,7 +24,7 @@ const Order = ({ order, setOrderStatus }) => {
         {order.status !== ORDER_STATUS_DISPATCHED && (
           <Fragment>
             <Typography variant="subtitle2">
-              {date(new Date(created.seconds * 1000))}
+              {date(new Date(created && created.seconds * 1000))}
             </Typography>
             <Typography variant="subtitle2">{userInfo.lastname}</Typography>
             <Typography variant="subtitle2">
