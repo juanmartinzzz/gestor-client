@@ -2,11 +2,7 @@ import React, { Fragment } from "react";
 import { Typography } from "@material-ui/core";
 import { currency } from "../../services/formatter";
 import { applyDiscountPercentage } from "../../services/transformer";
-
-const discountPercentage = process.env.REACT_APP_DISCOUNT_PERCENTAGE;
-
-const getTotal = cart =>
-  cart.items.reduce((sum, { product }) => sum + product.price, 0);
+import { getTotalPriceFromCartBeforeDiscount } from "../../services/calculations/cart";
 
 const CartItem = ({ item }) => {
   const { product } = item;
@@ -25,7 +21,7 @@ const SubtotalAndTotal = ({price, discountPercentage}) => (
 )
 
 const CartItems = ({ cart }) => {
-  const price = getTotal(cart);
+  const price = getTotalPriceFromCartBeforeDiscount(cart);
 
   return (
     <Fragment>
@@ -33,7 +29,7 @@ const CartItems = ({ cart }) => {
         <CartItem key={i} item={item} />
       ))}
 
-      <SubtotalAndTotal price={price} discountPercentage={discountPercentage} />
+      <SubtotalAndTotal price={price} />
     </Fragment>
   );
 };

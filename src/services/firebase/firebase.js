@@ -60,7 +60,7 @@ class Firebase {
       .onSnapshot(doc => onSnapshot(getDocWithId(doc)), logError, onCompletion);
   };
 
-  prepareListQuery = ({ path, orderBy, limit }) => {
+  prepareListQuery = ({ path, orderBy, limit, where }) => {
     let reference = this.db.collection(path).limit(limit || 10);
 
     if (orderBy) {
@@ -69,6 +69,10 @@ class Firebase {
       reference = reference.orderBy(property, direction);
     } else {
       reference = reference.orderBy("order");
+    }
+
+    if(where) {
+      where.map(([a, b, c]) => reference = reference.where(a, b, c));
     }
 
     return reference;
@@ -80,8 +84,8 @@ class Firebase {
       .doc(document)
       .set(this.getDataWithDefaultFields(data), { merge: !replace });
 
-  getList = async ({ path, include, orderBy, limit }) => {
-    const reference = this.prepareListQuery({ path, orderBy, limit });
+  getList = async ({ path, include, orderBy, limit, where }) => {
+    const reference = this.prepareListQuery({ path, orderBy, limit, where });
     const listQuerySnapshot = await reference.get();
 
     const entities = await Promise.all(
@@ -99,6 +103,10 @@ class Firebase {
       .collection(path)
       .doc(document)
       .get();
+
+    if(!querySnapshot.exists) {
+      return;
+    }
 
     return {
       ...getDocWithId(querySnapshot),
