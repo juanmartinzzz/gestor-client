@@ -23,9 +23,13 @@ const LayoutPage = ({ loading }) => {
         <Tab label="Estadísticas"></Tab>
       </Tabs>
 
-      <SwipeableViewsWithMargin axis="x" index={value} onChangeIndex={handleChangeIndex}>
-        {value === 0 && <OrdersContainer />}
-        {value === 1 && <ReportsContainer />}
+      <SwipeableViewsWithMargin
+        axis="x"
+        index={value}
+        onChangeIndex={handleChangeIndex}
+      >
+        <OrdersContainer sectionIndex={value} />
+        <ReportsContainer sectionIndex={value} />
       </SwipeableViewsWithMargin>
     </CssBaseline>
   );

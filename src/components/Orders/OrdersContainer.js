@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { withFirebase } from "../FirebaseContext";
 import Orders from "./Orders";
 import { ORDER_STATUS_REQUESTED } from "./orderStatus";
 
-const OrdersContainer = ({ firebase }) => {
+const OrdersContainer = ({ firebase, sectionIndex }) => {
   const [orders, setOrders] = useState([]);
 
-  // onMount
   useEffect(() => {
     const unsubscribeToListener = firebase.onCollection({
       path: "orders",
@@ -21,26 +20,27 @@ const OrdersContainer = ({ firebase }) => {
     let notify = false;
 
     orders.map(({ status }) => {
-      if(status === ORDER_STATUS_REQUESTED && Notification.permission === 'granted') {
+      if (
+        status === ORDER_STATUS_REQUESTED &&
+        Notification.permission === "granted"
+      ) {
         notify = true;
       }
-    })
-    
-    if(notify) {
-      navigator.serviceWorker.getRegistration()
-      .then(register => {
-  
-        register.showNotification('Nuevo pedido', {
+    });
+
+    if (notify) {
+      navigator.serviceWorker.getRegistration().then(register => {
+        register.showNotification("Nuevo pedido", {
           // body: '.',
           vibrate: [1000, 500, 300],
-          tag: 'renotify',
-          renotify: true        
+          tag: "renotify",
+          renotify: true,
         });
       });
     }
-    
+
     setOrders(orders);
-  }
+  };
 
   function setOrderStatus(order, status) {
     firebase.set({
@@ -51,6 +51,10 @@ const OrdersContainer = ({ firebase }) => {
         status,
       },
     });
+  }
+
+  if (sectionIndex !== 0) {
+    return <Fragment />;
   }
 
   return <Orders orders={orders} setOrderStatus={setOrderStatus} />;
