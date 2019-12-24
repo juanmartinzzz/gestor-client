@@ -24,7 +24,7 @@ export const Products = ({ products }) => {
           </TableHead>
           <TableBody>
             {orderedProdutKeys.map((name) => (
-              <Row name={name} value={products[name]} />
+              <Row name={name} value={products[name]} key={name} />
             ))}
           </TableBody>
         </Table>

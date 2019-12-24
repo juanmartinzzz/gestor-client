@@ -14,7 +14,7 @@ export const Comments = ({comments}) => {
         <Typography variant="h6">Comentarios</Typography>
 
         {comments.map(entry => (
-          <ReportTable size="small">
+          <ReportTable size="small" key={entry.email}>
             <TableBody>
               <Row name="Nombre" value={entry.name} footer />
               <Row name="Email" value={entry.email} footer />
