@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SwipeableViews from "react-swipeable-views";
+import { SwipeableViewsWithMargin } from "../components";
 import { CssBaseline, Tabs, Tab } from "@material-ui/core";
 import OrdersContainer from "../Orders";
 import ReportsContainer from "../Reports";
@@ -23,10 +23,14 @@ const LayoutPage = ({ loading }) => {
         <Tab label="Estadísticas"></Tab>
       </Tabs>
 
-      <SwipeableViews axis="x" index={value} onChangeIndex={handleChangeIndex}>
-        {value === 0 && <OrdersContainer />}
-        {value === 1 && <ReportsContainer />}
-      </SwipeableViews>
+      <SwipeableViewsWithMargin
+        axis="x"
+        index={value}
+        onChangeIndex={handleChangeIndex}
+      >
+        <OrdersContainer sectionIndex={value} />
+        <ReportsContainer sectionIndex={value} />
+      </SwipeableViewsWithMargin>
     </CssBaseline>
   );
 };
