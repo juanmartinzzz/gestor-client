@@ -5,7 +5,7 @@ import OrdersContainer from "../Orders";
 import ReportsContainer from "../Reports";
 
 const LayoutPage = ({ loading }) => {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, value) => setValue(value);
   const handleChangeIndex = index => setValue(index);
