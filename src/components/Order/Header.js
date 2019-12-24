@@ -15,9 +15,9 @@ export const Header = ({ status, name, phone }) => (
     subheader={
       <Link
         target="_blank"
-        href={`http://api.whatsapp.com/send?phone=57${phone}&text="${orderStatusMap[
+        href={`http://api.whatsapp.com/send?phone=57${phone}&text=${orderStatusMap[
           status
-        ].whatsapp.replace("-nombre-", name.split(" ")[0])}"`}
+        ].whatsapp.replace("-nombre-", name.split(" ")[0])}`}
         variant="body1"
         color="secondary"
       >
