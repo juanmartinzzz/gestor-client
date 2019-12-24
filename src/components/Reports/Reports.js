@@ -7,7 +7,7 @@ import {
   monthNameMap,
 } from "../../services/datetime/date";
 
-const Reports = ({ reports, month, handleChangeMonth }) => {
+const Reports = ({ month, reports, monthReport, handleChangeMonth }) => {
   const [year, setYear] = useState(getCurrentYear());
 
   const handleChangeYear = ({ target }) => setYear(target.value);
@@ -29,8 +29,12 @@ const Reports = ({ reports, month, handleChangeMonth }) => {
           </MenuItem>
         ))}
       </Select>
+
       <div>&nbsp;</div>
+      
       <Grid container spacing={10}>
+        <Report report={monthReport} />;
+        
         {reports.map((report, i) => {
           return <Report key={i} report={report} />;
         })}

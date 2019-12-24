@@ -22,7 +22,7 @@ export const Hours = ({hours}) => {
           </TableHead>
           <TableBody>
             {Object.keys(hours).map(hour => (
-              <Row name={hour} value={hours[hour]} />
+              <Row name={hour} value={hours[hour]} key={hour} />
             ))}
           </TableBody>
         </Table>
