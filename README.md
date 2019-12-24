@@ -2,6 +2,7 @@
 
 ## Dependencies
 - Node.js: https://nodejs.org
+- Airtable: https://airtable.com
 - Firebase: https://firebase.google.com
 
 ## Installation
@@ -13,7 +14,8 @@
 ## Deployment
 Additional info: https://create-react-app.dev/docs/deployment
 
-- `node src/services/compress-images/products.js`
+- `clear; export $(grep -v '^#' .env | xargs); node src/data/fetchData.js`
+- TODO: Compress images
 - `npm run build`
 - `firebase init`
 - `firebase deploy`
@@ -42,7 +44,4 @@ ALSO: set caching headers for image caching, 7 days
     ...
 ```
 
-
-
-- Staging project: `firebase deploy -P pedidos-staging`
-- PRODUCTION project: `firebase deploy` ⚠️
+- PRODUCTION ⚠️ deployment: `firebase deploy`

@@ -3,6 +3,9 @@
 # logs
 *log
 
+# Frontend data, params, config directory
+src/data
+
 # Env and helpers
 .env
 env.*
