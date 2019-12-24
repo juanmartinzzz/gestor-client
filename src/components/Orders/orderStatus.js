@@ -1,4 +1,4 @@
-export const ORDER_STATUS_CONFIRMED = "confirmed";
+export const ORDER_STATUS_PENDING = "pending";
 export const ORDER_STATUS_REQUESTED = "requested";
 export const ORDER_STATUS_ACCEPTED = "accepted";
 export const ORDER_STATUS_DISPATCHED = "dispatched";
@@ -17,13 +17,13 @@ export const orderStatusMap = {
     value: i++,
     label: "Fallido",
   },
+  [ORDER_STATUS_PENDING]: {
+    value: i++,
+    label: "Pendiente",
+  },
   [ORDER_STATUS_REQUESTED]: {
     value: i++,
     label: "Solicitado",
-  },
-  [ORDER_STATUS_CONFIRMED]: {
-    value: i++,
-    label: "Confirmado",
   },
   [ORDER_STATUS_ACCEPTED]: {
     value: i++,

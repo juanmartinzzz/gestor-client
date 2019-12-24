@@ -39,7 +39,7 @@ export const getReport = async ({date = new Date(), firebase}) => {
     return;
   }
 
-  const newReport = createNewReport({orders, firebase});
+  const newReport = getNewReport({ orders, firebase });
 
   firebase.set({
     path: "reports/daily/reports",
@@ -50,7 +50,7 @@ export const getReport = async ({date = new Date(), firebase}) => {
   return newReport;
 }
 
-const createNewReport = ({orders}) => {
+const getNewReport = ({ orders }) => {
   const newReport = {
     orders: orders.length,
     totalPriceBeforeDiscount: 0,
