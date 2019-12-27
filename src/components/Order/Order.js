@@ -5,7 +5,7 @@ import { Actions } from "./Actions";
 import { Feedback } from "./Feedback";
 import { OrderCard } from "./components";
 import { CardDivider } from "../components";
-import { date } from "../../services/formatter";
+import { date } from "../../services/formatter/formatter";
 import { orderStatusMap, ORDER_STATUS_DISPATCHED } from "../Orders/orderStatus";
 import CartItems from "./CartItems";
 

@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Typography } from "@material-ui/core";
-import { currency } from "../../services/formatter";
-import { applyDiscountPercentage } from "../../services/transformer";
+import { currency } from "../../services/formatter/formatter";
+import { applyDiscountPercentage } from "../../services/transformer/transformer";
 import { getTotalPriceFromCartBeforeDiscount } from "../../services/calculations/cart";
 
 const CartItem = ({ item }) => {
@@ -14,11 +14,17 @@ const CartItem = ({ item }) => {
   );
 };
 
-const SubtotalAndTotal = ({price, discountPercentage}) => (
+const SubtotalAndTotal = ({ price, discountPercentage }) => (
   <Typography color="secondary">
-    {discountPercentage ? `Subotal y desc: ${currency(price)} -${discountPercentage}% = ${currency(applyDiscountPercentage(price, discountPercentage))}` : `Subotal: ${currency(price)}`} 
+    {discountPercentage
+      ? `Subotal y desc: ${currency(
+          price,
+        )} -${discountPercentage}% = ${currency(
+          applyDiscountPercentage(price, discountPercentage),
+        )}`
+      : `Subotal: ${currency(price)}`}
   </Typography>
-)
+);
 
 const CartItems = ({ cart }) => {
   const price = getTotalPriceFromCartBeforeDiscount(cart);
