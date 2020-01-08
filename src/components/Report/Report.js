@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { Typography, Grid, Collapse, Button, TableBody, Paper } from "@material-ui/core";
-import { currency } from "../../services/formatter";
+import {
+  Typography,
+  Grid,
+  Collapse,
+  Button,
+  TableBody,
+  Paper,
+} from "@material-ui/core";
+import { currency } from "../../services/formatter/formatter";
 import { Comments } from "./Comments";
 import { Products } from "./Products";
 import { Hours } from "./Hours";
@@ -23,15 +30,23 @@ const Report = ({ report }) => {
           <TableBody>
             <Row name="Pedidos" value={report.orders} />
             <Row name="Clientes únicos" value={report.numberUniqueClients} />
-            <Row name="Total vendido" value={currency(report.totalPriceBeforeDiscount)} />
-            <Row name="Pedido promedio" value={currency(report.averagePriceBeforeDiscount)} />
+            <Row
+              name="Total vendido"
+              value={currency(report.totalPriceBeforeDiscount)}
+            />
+            <Row
+              name="Pedido promedio"
+              value={currency(report.averagePriceBeforeDiscount)}
+            />
             <Row name="Ratings recibidos" value={report.ratings.length} />
             <Row name="Rating promedio" value={report.averageRating} />
           </TableBody>
         </ReportTable>
       </Paper>
-  
-      <Button onClick={handleExpandClick} size="small">Detalles</Button>
+
+      <Button onClick={handleExpandClick} size="small">
+        Detalles
+      </Button>
 
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Products products={report.products} />
@@ -42,6 +57,6 @@ const Report = ({ report }) => {
       </Collapse>
     </Grid>
   );
-}
+};
 
 export default Report;
