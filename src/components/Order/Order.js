@@ -41,17 +41,9 @@ const Order = ({ order, setOrderStatus }) => {
 
             <Typography variant="caption">
               {userInfo.addChopsticks && " · Palillos"}
-            </Typography>
-            <Typography variant="caption">
               {userInfo.addTeriyaki && " · Teriyaki"}
-            </Typography>
-            <Typography variant="caption">
               {userInfo.addGinger && " · Jenjibre"}
-            </Typography>
-            <Typography variant="caption">
               {userInfo.addWasabi && " · Wasabi"}
-            </Typography>
-            <Typography variant="caption">
               {userInfo.addSoy && " · Soya"}
             </Typography>
           </Fragment>

@@ -2,14 +2,14 @@ import React, { Fragment } from "react";
 import { Typography } from "@material-ui/core";
 import { currency } from "../../services/formatter/formatter";
 import { applyDiscountPercentage } from "../../services/transformer/transformer";
-import { getTotalPriceFromCartBeforeDiscount } from "../../services/calculations/cart";
+import { getTotalCost } from "../../services/calculations/cart";
 
 const CartItem = ({ item }) => {
-  const { product } = item;
+  const { main } = item;
 
   return (
     <Typography variant="subtitle2">
-      {product.pieces} {product.name}: {currency(product.price)}
+      {main.pieces} {main.name}: {currency(main.price)}
     </Typography>
   );
 };
@@ -26,18 +26,14 @@ const SubtotalAndTotal = ({ price, discountPercentage }) => (
   </Typography>
 );
 
-const CartItems = ({ cart }) => {
-  const price = getTotalPriceFromCartBeforeDiscount(cart);
+const CartItems = ({ cart }) => (
+  <Fragment>
+    {cart.items.map((item, i) => (
+      <CartItem key={i} item={item} />
+    ))}
 
-  return (
-    <Fragment>
-      {cart.items.map((item, i) => (
-        <CartItem key={i} item={item} />
-      ))}
-
-      <SubtotalAndTotal price={price} />
-    </Fragment>
-  );
-};
+    <SubtotalAndTotal price={getTotalCost(cart.items)} />
+  </Fragment>
+);
 
 export default CartItems;

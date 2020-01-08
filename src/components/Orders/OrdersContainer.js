@@ -1,7 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { withFirebase } from "../FirebaseContext";
 import Orders from "./Orders";
-import { ORDER_STATUS_REQUESTED } from "./orderStatus";
+import { ORDER_STATUS_REQUESTED, ORDER_STATUS_REJECTED, ORDER_STATUS_ACCEPTED } from "./orderStatus";
+import { getEmail } from "../../services/entities/email";
 
 const OrdersContainer = ({ firebase, sectionIndex }) => {
   const [orders, setOrders] = useState([]);
@@ -10,6 +11,7 @@ const OrdersContainer = ({ firebase, sectionIndex }) => {
     const unsubscribeToListener = firebase.onCollection({
       path: "orders",
       orderBy: ["created-desc"],
+      where: [["created", ">", new Date("2020-01-07")]],
       onSnapshot: handleOrdersChange,
     });
 
@@ -42,7 +44,21 @@ const OrdersContainer = ({ firebase, sectionIndex }) => {
     setOrders(orders);
   };
 
-  function setOrderStatus(order, status) {
+  const setOrderStatus = async (order, status) => {
+    if(order.status === ORDER_STATUS_REQUESTED && status === ORDER_STATUS_ACCEPTED) {
+      const email = await getEmail({emailAddress: order.userInfo.email, firebase});
+      
+      firebase.set({
+        path: "emails",
+        document: order.userInfo.email,
+        data: {
+          created: email.created,
+          // TODO: create something to change an order into an order for storing in email. Actually create AddOrder method
+          orders: {...email.orders, [order.id]: {created: order.created, pointEntries: order.pointEntries}},
+        },
+      });
+    }
+
     firebase.set({
       path: "orders",
       document: order.id,
