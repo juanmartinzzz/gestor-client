@@ -28,8 +28,8 @@ const LayoutPage = ({ loading }) => {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        <OrdersContainer sectionIndex={value} />
-        <ReportsContainer sectionIndex={value} />
+        {(value === 0) && <OrdersContainer sectionIndex={value} />}
+        {(value === 1) && <ReportsContainer sectionIndex={value} />}
       </SwipeableViewsWithMargin>
     </CssBaseline>
   );
