@@ -42,15 +42,20 @@ const ReportsContainer = ({ firebase, sectionIndex }) => {
 
     Object.keys(report.hours).map(key => {
       monthReport.hours[key] = monthReport.hours[key] ? monthReport.hours[key]+report.hours[key] : report.hours[key];
+      return null;
     })
 
     Object.keys(report.clients).map(key => {
       monthReport.clients[key] = monthReport.clients[key] ? monthReport.clients[key]+report.clients[key] : report.clients[key];
+      return null;
     })
 
     Object.keys(report.products).map(key => {
       monthReport.products[key] = monthReport.products[key] ? monthReport.products[key]+report.products[key] : report.products[key];
+      return null;
     })
+
+    return null;
   })
 
   const totalRating = monthReport.ratings.reduce(

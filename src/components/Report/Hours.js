@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Table, TableHead, TableRow, TableCell, TableBody, Paper, Card, CardContent } from "@material-ui/core";
+import { Typography, Table, TableHead, TableRow, TableCell, TableBody, CardContent } from "@material-ui/core";
 import { Row } from "./Row";
 import { ReportCard } from "./components";
 

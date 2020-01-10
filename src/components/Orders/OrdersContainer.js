@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { withFirebase } from "../FirebaseContext";
 import Orders from "./Orders";
-import { ORDER_STATUS_REQUESTED, ORDER_STATUS_REJECTED, ORDER_STATUS_ACCEPTED } from "./orderStatus";
+import { ORDER_STATUS_REQUESTED, ORDER_STATUS_ACCEPTED } from "./orderStatus";
 import { getEmail } from "../../services/entities/email";
 
 const OrdersContainer = ({ firebase, sectionIndex }) => {
@@ -28,6 +28,8 @@ const OrdersContainer = ({ firebase, sectionIndex }) => {
       ) {
         notify = true;
       }
+
+      return null;
     });
 
     if (notify) {
