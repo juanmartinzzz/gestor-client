@@ -16,6 +16,7 @@ export default createMuiTheme({
     },
   },
   typography: {
+    fontSize: 12,
     fontFamily: ["Raleway"].join(","),
   },
 });

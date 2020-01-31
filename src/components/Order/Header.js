@@ -6,6 +6,9 @@ import { ORDER_STATUS_REQUESTED, orderStatusMap } from "../Orders/orderStatus";
 export const Header = ({ status, name, phone }) => (
   <OrderHeader
     title={name}
+    titleTypographyProps={{
+      variant: "h5"
+    }}
     action={
       status === ORDER_STATUS_REQUESTED && (
         <CircularProgress color="secondary" />
@@ -18,7 +21,7 @@ export const Header = ({ status, name, phone }) => (
         href={`http://api.whatsapp.com/send?phone=57${phone}&text=${orderStatusMap[
           status
         ].whatsapp.replace("-nombre-", name.split(" ")[0])}`}
-        variant="body1"
+        variant="h5"
         color="secondary"
       >
         {phone}

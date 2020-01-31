@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { Typography, Table, TableHead, TableRow, TableCell, TableBody, Card, CardContent } from "@material-ui/core";
+import React from "react";
+import { Typography, TableBody, CardContent } from "@material-ui/core";
 import { ReportCard, ReportTable } from "./components";
 import { Row } from "./Row";
 
