@@ -4,7 +4,7 @@ import { CssBaseline, Tabs, Tab } from "@material-ui/core";
 import OrdersContainer from "../Orders";
 import ReportsContainer from "../Reports";
 
-const LayoutPage = ({ loading }) => {
+const LayoutPage = () => {
   const [value, setValue] = useState(0);
 
   const handleChange = (event, value) => setValue(value);
@@ -28,8 +28,8 @@ const LayoutPage = ({ loading }) => {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
-        {(value === 0) && <OrdersContainer sectionIndex={value} />}
-        {(value === 1) && <ReportsContainer sectionIndex={value} />}
+        {(value === 0) ? <OrdersContainer sectionIndex={value} /> : <div />}
+        {(value === 1) ? <ReportsContainer sectionIndex={value} /> : <div />}
       </SwipeableViewsWithMargin>
     </CssBaseline>
   );

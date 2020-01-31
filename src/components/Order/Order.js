@@ -17,21 +17,21 @@ const Order = ({ order, setOrderStatus }) => {
       <Header status={status} phone={userInfo.phone} name={userInfo.name} />
 
       <CardContent>
-        <Typography variant="subtitle1">
+        <Typography variant="h6">
           Status: {orderStatusMap[status].label}
         </Typography>
 
         {order.status !== ORDER_STATUS_DISPATCHED && (
           <Fragment>
-            <Typography variant="subtitle2">
+            <Typography variant="h6">
               {date(new Date(created && created.seconds * 1000), false, true)}
             </Typography>
-            <Typography variant="subtitle2">{userInfo.lastname}</Typography>
-            <Typography variant="subtitle2">
+            <Typography variant="h6">{userInfo.lastname}</Typography>
+            <Typography variant="h6">
               {userInfo.address}, {userInfo.locality}
             </Typography>
-            <Typography variant="subtitle2">{userInfo.notes}</Typography>
-            <Typography variant="subtitle2">{userInfo.email}</Typography>
+            <Typography variant="h6">{userInfo.notes}</Typography>
+            <Typography variant="h6">{userInfo.email}</Typography>
 
             <CardDivider />
 
@@ -39,7 +39,7 @@ const Order = ({ order, setOrderStatus }) => {
 
             <CardDivider />
 
-            <Typography variant="caption">
+            <Typography variant="h6">
               {userInfo.addChopsticks && " · Palillos"}
               {userInfo.addTeriyaki && " · Teriyaki"}
               {userInfo.addGinger && " · Jenjibre"}

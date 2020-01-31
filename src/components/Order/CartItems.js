@@ -8,14 +8,14 @@ const CartItem = ({ item }) => {
   const { main } = item;
 
   return (
-    <Typography variant="subtitle2">
+    <Typography variant="h6">
       {main.pieces} {main.name}: {currency(main.price)}
     </Typography>
   );
 };
 
 const SubtotalAndTotal = ({ price, discountPercentage }) => (
-  <Typography color="secondary">
+  <Typography variant="h5" color="secondary">
     {discountPercentage
       ? `Subotal y desc: ${currency(
           price,

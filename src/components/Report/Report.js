@@ -13,6 +13,7 @@ import { Products } from "./Products";
 import { Hours } from "./Hours";
 import { ReportTable } from "./components";
 import { Row } from "./Row";
+import OrdersHourChart from "./OrdersHourChart";
 
 const Report = ({ report }) => {
   const [expanded, setExpanded] = useState(false);
@@ -22,8 +23,10 @@ const Report = ({ report }) => {
   };
 
   return (
-    <Grid item xs={12} sm={6} md={4}>
+    <Grid item xs={12}>
       <Typography variant="h6">{report.id}</Typography>
+
+      <OrdersHourChart report={report} />
 
       <Paper>
         <ReportTable size="small">
