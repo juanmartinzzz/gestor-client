@@ -6,7 +6,7 @@ import ReportsContainer from "../Reports";
 import AirtableReportsContainer from "../AirtableReports/AirtableReportsContainer";
 
 const LayoutPage = () => {
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, value) => setValue(value);
   const handleChangeIndex = index => setValue(index);

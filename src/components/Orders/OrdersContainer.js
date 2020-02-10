@@ -16,7 +16,7 @@ const OrdersContainer = ({ firebase, sectionIndex }) => {
     });
 
     return () => unsubscribeToListener();
-  }, []);
+  }, [firebase]);
 
   const handleOrdersChange = orders => {
     let notify = false;
