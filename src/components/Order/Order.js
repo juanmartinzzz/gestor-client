@@ -4,10 +4,10 @@ import { Header } from "./Header";
 import { Actions } from "./Actions";
 import { Feedback } from "./Feedback";
 import { OrderCard } from "./components";
-import { CardDivider } from "../components";
-import { date } from "../../services/formatter/formatter";
-import { orderStatusMap, ORDER_STATUS_DISPATCHED } from "../Orders/orderStatus";
 import CartItems from "./CartItems";
+import MilesContainer from "../Miles/MilesContainer";
+import { orderStatusMap, ORDER_STATUS_DISPATCHED } from "../Orders/orderStatus";
+import { date } from "../../services/formatter/formatter";
 
 const Order = ({ order, setOrderStatus }) => {
   const { status, created, userInfo, cart } = order;
@@ -34,6 +34,8 @@ const Order = ({ order, setOrderStatus }) => {
             <Typography variant="h6">{userInfo.email}</Typography>
 
             <CartItems cart={cart} />
+
+            <MilesContainer email={userInfo.email} />
 
             <Typography variant="h6">
               {userInfo.addChopsticks && " · Palillos"}

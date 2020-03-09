@@ -13,6 +13,7 @@ const OrdersContainer = ({ firebase, sectionIndex }) => {
       orderBy: ["created-desc"],
       where: [["created", ">", new Date("2020-01-07")]],
       onSnapshot: handleOrdersChange,
+      limit: 20,
     });
 
     return () => unsubscribeToListener();
