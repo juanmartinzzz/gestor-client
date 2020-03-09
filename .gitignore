@@ -3,9 +3,6 @@
 # Link to Services repo. More info: https://github.com/rollsco/services
 src/services
 
-# logs
-*log
-
 # Frontend data, params, config directory
 src/data
 
@@ -24,6 +21,10 @@ env.*
 # testing
 /coverage
 
+# img assets
+uncompressed/img
+public/img
+
 # production
 /build
 
@@ -34,6 +35,7 @@ env.*
 .env.test.local
 .env.production.local
 
+*log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
