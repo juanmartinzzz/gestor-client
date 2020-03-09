@@ -3,6 +3,7 @@ import { SwipeableViewsWithMargin } from "../components";
 import { CssBaseline, Tabs, Tab } from "@material-ui/core";
 import OrdersContainer from "../Orders";
 import ReportsContainer from "../Reports";
+import AirtableReportsContainer from "../AirtableReports/AirtableReportsContainer";
 
 const LayoutPage = () => {
   const [value, setValue] = useState(0);
@@ -21,6 +22,7 @@ const LayoutPage = () => {
       >
         <Tab label="Pedidos"></Tab>
         <Tab label="Estadísticas"></Tab>
+        <Tab label="Reportes en Airtable"></Tab>
       </Tabs>
 
       <SwipeableViewsWithMargin
@@ -30,6 +32,7 @@ const LayoutPage = () => {
       >
         {(value === 0) ? <OrdersContainer sectionIndex={value} /> : <div />}
         {(value === 1) ? <ReportsContainer sectionIndex={value} /> : <div />}
+        {(value === 2) ? <AirtableReportsContainer sectionIndex={value} /> : <div />}
       </SwipeableViewsWithMargin>
     </CssBaseline>
   );

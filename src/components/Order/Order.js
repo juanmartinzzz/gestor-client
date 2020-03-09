@@ -33,11 +33,7 @@ const Order = ({ order, setOrderStatus }) => {
             <Typography variant="h6">{userInfo.notes}</Typography>
             <Typography variant="h6">{userInfo.email}</Typography>
 
-            <CardDivider />
-
             <CartItems cart={cart} />
-
-            <CardDivider />
 
             <Typography variant="h6">
               {userInfo.addChopsticks && " · Palillos"}
