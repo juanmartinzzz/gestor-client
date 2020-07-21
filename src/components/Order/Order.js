@@ -6,7 +6,7 @@ import { Feedback } from "./Feedback";
 import { OrderCard } from "./components";
 import CartItems from "./CartItems";
 import MilesContainer from "../Miles/MilesContainer";
-import { orderStatusMap, ORDER_STATUS_DISPATCHED } from "../Orders/orderStatus";
+import { ORDER_STATUS_DISPATCHED } from "../Orders/orderStatus";
 import { date } from "../../services/formatter/formatter";
 
 const Order = ({ order, setOrderStatus }) => {
@@ -18,18 +18,16 @@ const Order = ({ order, setOrderStatus }) => {
 
       <CardContent>
         <Typography variant="h6">
-          Status: {orderStatusMap[status].label}
+          Creado: {date(new Date(created && created.seconds * 1000), false, true)}
+        </Typography>
+        
+        <Typography variant="h6">
+          {userInfo.address}, {userInfo.locality}
         </Typography>
 
         {order.status !== ORDER_STATUS_DISPATCHED && (
           <Fragment>
-            <Typography variant="h6">
-              {date(new Date(created && created.seconds * 1000), false, true)}
-            </Typography>
             <Typography variant="h6">{userInfo.lastname}</Typography>
-            <Typography variant="h6">
-              {userInfo.address}, {userInfo.locality}
-            </Typography>
             <Typography variant="h6">{userInfo.notes}</Typography>
             <Typography variant="h6">{userInfo.email}</Typography>
 

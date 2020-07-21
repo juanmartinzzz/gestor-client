@@ -1,6 +1,6 @@
 import React from "react";
 import { Table, TableBody, TableRow, TableCell, Paper, TableHead, Typography } from "@material-ui/core";
-import { getHumanUtcDate } from "../../services/formatter/formatter";
+import { getHumanDate } from "../../services/formatter/formatter";
 
 const Miles = ({ pointEntries }) => (
   <Paper>
@@ -14,7 +14,7 @@ const Miles = ({ pointEntries }) => (
       <TableBody>
         {pointEntries.map(pointEntry => (
           <TableRow>
-            <TableCell>{getHumanUtcDate({date: new Date(pointEntry.created && pointEntry.created.seconds * 1000)})}</TableCell>
+            <TableCell>{getHumanDate({date: new Date(pointEntry.created && pointEntry.created.seconds * 1000)})}</TableCell>
             <TableCell align="right">{pointEntry.points}</TableCell>
           </TableRow>
         ))}
