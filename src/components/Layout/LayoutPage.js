@@ -6,7 +6,7 @@ import ReportsContainer from "../Reports";
 import LocationsContainer from "../Locations/LocationsContainer";
 
 const LayoutPage = () => {
-  const [value, setValue] = useState(1);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, value) => setValue(value);
   const handleChangeIndex = index => setValue(index);

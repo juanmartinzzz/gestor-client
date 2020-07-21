@@ -23,6 +23,7 @@
     "build": "npm run fetch-params; npm run compress-images; react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "deploy": "echo 'deploy to PRODUCTION. Press Ctrl + C to cancel'; read b; npm run build; cp env.PROD .env; firebase use default && firebase deploy; cp env.dev .env; say 'built and deployed to firebase production'",
     "copy-services": "mv src/services /tmp/services; cp -r ../services/src/services src",
     "fetch-params": "export $(grep -v '^#' .env | xargs); node src/fetchParameters.js",
     "compress-images": "rm -r /tmp/img.backup; mv public/img /tmp/img.backup; node src/services/imageCompressor/imageCompressor.js"
