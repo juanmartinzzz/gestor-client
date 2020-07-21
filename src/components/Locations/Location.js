@@ -15,7 +15,7 @@ const Location = ({ location, setLocationOpen }) => (
           <Select
             labelId="open" 
             value={location.open} 
-            onChange={({ target }) => setLocationOpen(location.id, target.value)}
+            onChange={({ target }) => setLocationOpen(location.id, parseInt(target.value))}
           >
             <MenuItem value="2">Según el horario actual</MenuItem>
             <MenuItem value="1">ABIERTA por fuerza</MenuItem>
