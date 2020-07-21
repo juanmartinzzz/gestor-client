@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import SwipeableViews from "react-swipeable-views";
-import { Divider } from "@material-ui/core";
+import { Divider, Paper } from "@material-ui/core";
+
+export const PaperWithPadding = styled(Paper)`
+  padding: 16px;
+`;
 
 export const SwipeableViewsWithMargin = styled(SwipeableViews)`
   margin: 24px 0;

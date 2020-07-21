@@ -1,6 +1,6 @@
 import React from "react";
 import { OrderHeader, UserAvatar } from "./components";
-import { Link, CircularProgress } from "@material-ui/core";
+import { Link, CircularProgress, Chip } from "@material-ui/core";
 import { ORDER_STATUS_REQUESTED, orderStatusMap } from "../Orders/orderStatus";
 
 export const Header = ({ status, name, phone }) => (
@@ -10,9 +10,10 @@ export const Header = ({ status, name, phone }) => (
       variant: "h5"
     }}
     action={
-      status === ORDER_STATUS_REQUESTED && (
-        <CircularProgress color="secondary" />
-      )
+      (status === ORDER_STATUS_REQUESTED) ? 
+      <CircularProgress color="secondary" /> 
+      : 
+      <Chip label={orderStatusMap[status].label} />
     }
     avatar={<UserAvatar phone={phone}>{name[0].toUpperCase()}</UserAvatar>}
     subheader={
